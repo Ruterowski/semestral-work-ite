@@ -19,6 +19,25 @@ void ConnectionEstablished(){
   server.send(200, "text/plain", "Connection established");
 }
 
+// Endpoint - display message
+void DisplayMessage(){
+  // Check if the payload contains the message
+  if(server.hasArg("msg")){
+    String message = server.arg("msg");
+    // Clear the display
+    tft.fillScreen(TFT_BLACK);
+    tft.setCursor(0, 0, 2);
+    // Print the message
+    tft.println(message);
+    // Return 200 response with printed message
+    server.send(200, "text/plain", "Printed the message: " + message);
+  }
+  else{
+    // Return 400 reposnse with error message
+    server.send(400, "text/plain", "Error: no message passed");
+  }
+}
+
 void setup() {
   // Enable serial monitor for debugging purposes
   Serial.begin(9600);
@@ -52,6 +71,8 @@ void setup() {
   server.begin();
   // Setup endpoint - base root endpoint
   server.on("/", ConnectionEstablished);
+  // Setup endpoint - display message endpoint
+  server.on("/displayMessage", DisplayMessage);
   Serial.println("WebServer started");
   tft.println("WebServer started");
 }
