@@ -7,6 +7,10 @@ const int RedPin = 22; // variable to hold pin for red LED
 const int YellowPin = 21; // variable to hold pin for yellow LED
 const int GreenPin = 17; // variable to hold pin for green LED
 
+bool yellowOn = false;
+bool redOn = false;
+bool greenOn = false;
+
 TFT_eSPI tft = TFT_eSPI();  // Object for display on ESP32
 
 // SSID of Wifi access point
@@ -43,20 +47,38 @@ void SwitchLedOn() {
   if (server.hasArg("clr")) {
     String color = server.arg("clr");
     if (color == "red") {
+      if(!redOn) {
       //Switch on red LED
       digitalWrite(RedPin, HIGH);
       //Return 200 response
       server.send(200, "text/plain", "Red LED switched on");
+      redOn = true;
+      }
+      else {
+        server.send(400, "text/plain", "Red LED is already switched on");
+      }
     } else if (color == "yellow") {
+      if (!yellowOn) {
       //Switch on yellow LED
       digitalWrite(YellowPin, HIGH);
       //Return 200 response
       server.send(200, "text/plain", "Yellow LED switched on");
+      yellowOn = true;
+      }
+      else {
+        server.send(400, "text/plain", "Yellow LED is already switched on");
+      }
     } else if (color == "green") {
+      if (!greenOn){
       //Switch on green LED
       digitalWrite(GreenPin, HIGH);
       //Return 200 response
       server.send(200, "text/plain", "Green LED switched on");
+      greenOn = true;
+      }
+      else {
+        server.send(400, "text/plain", "Green LED is already switched on");
+      }
     }
     else {
       server.send(400, "text/plain", "Error: LED with that color doesn't exist");
@@ -70,24 +92,43 @@ void SwitchLedOn() {
 
 //endpoint - Switch off the LEDs
 void SwitchLedOff() {
+  
   //Check if the payload contains the color
   if (server.hasArg("clr")) {
     String color = server.arg("clr");
     if (color == "red") {
+      if(redOn){
       //Switch off red LED
       digitalWrite(RedPin, LOW);
       //Return 200 response
       server.send(200, "text/plain", "Red LED switched off");
+      redOn = false;
+      }
+      else{
+        server.send(400, "text/plain", "Red LED is already switched off");
+      }
     } else if (color == "yellow") {
+      if (yellowOn){
       //Switch off yellow LED
       digitalWrite(YellowPin, LOW);
       //Return 200 response
       server.send(200, "text/plain", "Yellow LED switched off");
+      yellowOn = false;
+      }
+      else{
+        server.send(400, "text/plain", "Yellow LED is already switched off");
+      }
     } else if (color == "green") {
+      if (greenOn){
       //Switch off green LED
       digitalWrite(GreenPin, LOW);
       //Return 200 response
       server.send(200, "text/plain", "Green LED switched off");
+      greenOn = false;
+      }
+      else {
+        server.send(400, "text/plain", "Green LED is already switched off");
+      }    
     } else {
       //Return 400 response with error message
       server.send(400, "text/plain", "Error: LED with that color doesn't exist");
