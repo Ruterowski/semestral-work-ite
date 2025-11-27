@@ -1,15 +1,15 @@
 import tkinter
-from serverCommunication import *
+from .serverCommunication import *
 
 root = tkinter.Tk()
 
 led_on = False
 
-green_img = tkinter.PhotoImage(file="../assets/led_images/green.png")
+green_img = tkinter.PhotoImage(file="assets/led_images/green.png")
 green_img = green_img.subsample(4, 4)
-yellow_img = tkinter.PhotoImage(file="../assets/led_images/yellow.png")
+yellow_img = tkinter.PhotoImage(file="assets/led_images/yellow.png")
 yellow_img = yellow_img.subsample(4, 4)
-red_img = tkinter.PhotoImage(file="../assets/led_images/red.png")
+red_img = tkinter.PhotoImage(file="assets/led_images/red.png")
 red_img = red_img.subsample(4, 4)
 
 def startGui():
@@ -24,7 +24,7 @@ def addMainLabel():
     label = tkinter.Label(root, text="Welcome to ITE Semestral Work Project", font=("Arial", 30))
     label.grid(row=0, column=0)
     response = checkServerStatusConnection()
-    label_connection = tkinter.Label(root, text=response, font=("Arial", 20))
+    label_connection = tkinter.Label(root, text=response.text, font=("Arial", 20))
     label_connection.grid(row=1, column=0)
 
 def addEntryForDisplayingUserMessage():

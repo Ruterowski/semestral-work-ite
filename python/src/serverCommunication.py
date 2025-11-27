@@ -1,5 +1,3 @@
-from http.client import responses
-
 import requests
 
 led_states = {
@@ -10,12 +8,11 @@ led_states = {
 
 def checkServerStatusConnection():
     response = requests.get("http://192.168.4.1/")
-    print(response.text)
-    return response.text
+    return response
 
 def displayUserMessage(message):
     response = requests.get(f"http://192.168.4.1/displayMessage?msg={message}")
-    print(response.text)
+    return response
 
 def toggleLed(led_label, color):
     led_states[color] = not led_states[color]
@@ -26,4 +23,4 @@ def toggleLed(led_label, color):
     else:
         response = requests.get(f"http://192.168.4.1/ledoff?clr={color}")
         led_label.config(text="ON")
-    print(response.text)
+    return response
