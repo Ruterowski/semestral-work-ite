@@ -41,17 +41,21 @@ def addEntryForDisplayingUserMessage():
     button.grid(row=4, column=0)
 
 def addLedControlPannel():
-    label_green = tkinter.Label(root, image=green_img)
-    label_yellow = tkinter.Label(root, image=yellow_img)
-    label_red = tkinter.Label(root, image=red_img)
+    frame = tkinter.Frame(root)
+    frame.grid(row=5, column=0, columnspan=3)
 
-    label_green.grid(row=5, column=0)
-    label_yellow.grid(row=5, column=1)
-    label_red.grid(row=5, column=2)
+    label_green = tkinter.Label(frame, image=green_img)
+    label_yellow = tkinter.Label(frame, image=yellow_img)
+    label_red = tkinter.Label(frame, image=red_img)
 
-    button_green = tkinter.Button(root, text="ON", command=lambda: toggleLed(button_green, "green"))
-    button_green.grid(row=6, column=0)
-    button_yellow = tkinter.Button(root, text="ON", command=lambda: toggleLed(button_yellow, "yellow"))
-    button_yellow.grid(row=6, column=1)
-    button_red = tkinter.Button(root, text="ON", command=lambda: toggleLed(button_red, "red"))
-    button_red.grid(row=6, column=2)
+    label_green.grid(row=0, column=0, padx=10)
+    label_yellow.grid(row=0, column=1, padx=10)
+    label_red.grid(row=0, column=2, padx=10)
+
+    button_green = tkinter.Button(frame, text="ON", command=lambda: toggleLed(button_green, "green"))
+    button_green.grid(row=1, column=0)
+    button_yellow = tkinter.Button(frame, text="ON", command=lambda: toggleLed(button_yellow, "yellow"))
+    button_yellow.grid(row=1, column=1)
+    button_red = tkinter.Button(frame, text="ON", command=lambda: toggleLed(button_red, "red"))
+    button_red.grid(row=1, column=2)
+
