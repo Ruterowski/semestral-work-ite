@@ -1,3 +1,7 @@
+"""
+Modul, which holds the implementation of creating the GUI window.
+"""
+
 import tkinter
 from .serverCommunication import *
 
@@ -13,6 +17,9 @@ red_img = tkinter.PhotoImage(file="assets/led_images/red.png")
 red_img = red_img.subsample(4, 4)
 
 def startGui():
+    """
+    Main method for creating and running the GUI window.
+    """
     root.geometry("1000x1000")
     root.title("ITE Semestral work")
     addMainLabel()
@@ -21,6 +28,9 @@ def startGui():
     root.mainloop()
 
 def addMainLabel():
+    """
+    Creates the main label with welcome message to the GUI.
+    """
     label = tkinter.Label(root, text="Welcome to ITE Semestral Work Project", font=("Arial", 30))
     label.grid(row=0, column=0)
     response = checkServerStatusConnection()
@@ -28,6 +38,9 @@ def addMainLabel():
     label_connection.grid(row=1, column=0)
 
 def addEntryForDisplayingUserMessage():
+    """
+    Creates a user entry field. Allows user to enter a message which will be displayed on the ESP32.
+    """
     message_var = tkinter.StringVar()
     message_var.set("")
 
@@ -41,6 +54,9 @@ def addEntryForDisplayingUserMessage():
     button.grid(row=4, column=0)
 
 def addLedControlPannel():
+    """
+    Creates a LED control panel. Allows the user to switch on/off corresponding LED on ESP32.
+    """
     frame = tkinter.Frame(root)
     frame.grid(row=5, column=0, columnspan=3)
 
