@@ -27,4 +27,4 @@ You should see a GUI window pop-up. From this point, you can have fun using our 
 - Currently, to use the Python program, user needs to be connected to Wifi hosted by ESP32.
 - Implementing HTU21 temperature and humidity sensor makes the ESP32 board crash.
 ## Tests
-[Tests Documentation]("C:\Users\adipl\Desktop\ite\semestral-work-ite\python\tests\tests.md")
+[Tests Documentation](python/tests/tests.md)
